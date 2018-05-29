@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Алексей Абросимов](https://up.htmlacademy.ru/javascript/14/user/117377).
-* Наставник: `Неизвестно`.
+* Наставник: `Андрей Дос`.
 
 ---
 
