@@ -35,10 +35,10 @@ var createOffer = function (i) {
       title: titles[i],
       type: getItrValue (type),
       address: locationX + ',' + locationY,
-      price: getRandomPrice (1000, 1000000),
+      price: getRandomNumber (1000, 1000000),
       features: getRandomArrayElements (),
-      rooms: getRandomRoom (1, 5),
-      guests: getRandomGuests (1, 25),
+      rooms: getRandomNumber (1, 5),
+      guests: getRandomNumber (1, 25),
       checkin: getItrValue (checkins),
       checkout: getItrValue (checkouts),
       description: '',
@@ -54,7 +54,6 @@ var createOffer = function (i) {
 var getValues = function () {
   var values = [];
   for ( var i = 0; i < 8; i++) {
-    getValues (i);
     values.push(createOffer(i));
   }
   return values;
@@ -67,28 +66,32 @@ cityMap.classlist.remove('.map--faded');
 }
 hideMap ();
 
+var template = document.querySelector('template');
+var pinTemplate = template.content.querySelector('.map__pin');
+var map = document.querySelector('.map');
+var mapPinsContainer = document.querySelector('.map__pins');
+var mapPinMain = document.querySelector('.map__pin--main');
 
-var getPin = function () {
-  var button = document.cleateElement('button');
-  var img = document.cleateElement('img');
+var makePinItem = function(ad) {
+  var pinItem = pinTemplate.cloneNode(true);
+  var pinAvatar = pinItem.querySelector('img');
 
-  button.classlist.add('map-pin');
-  button.style.left = offer.location.x + 'px';
-  button.style.top = offer.location.y + 'px';
+  pinItem.style.left = ad.location.x + 'px';
+  pinItem.style.top = ad.location.y + 'px';
+  pinAvatar.src = ad.author.avatar;
+  pinAvatar.alt = ad.offer.title;
 
-  img.src = author.avatar;
-  img.alt = offer.title;
+  return pinItem;
+};
 
-  button.appendChild(img);
-  return button;
-}
+var renderPins = function(arr) {
+  var fragment = createDocumentFragment();
 
-var renderPins = function (arr) {
-  var fragment = document.createDocumentFragment();
-
-  fragment.appendChild(getPin());
-}
-return fragment;
+  arr.forEach(function(it) {
+    fragment.appendChild(makePinItem(it));
+  });
+  return fragment;
+};
 
 function () {
   var IMG_WIDTH = 45;
