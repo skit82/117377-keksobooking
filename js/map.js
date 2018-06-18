@@ -13,7 +13,7 @@ var getItrValue = function (arr) {
   return arr[randomIndex];
 }
 
-var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var getRandomArrayElements = function () {
   var elements = [];
   for (var i = 0; i < features.length; i++) {
@@ -30,7 +30,7 @@ var createOffer = function (i) {
   return {
     author: {
       avatar: 'img/avatars/user0' + (i + 1) + '.png'
-    }
+    },
     offer: {
       title: titles[i],
       type: getItrValue (type),
@@ -62,7 +62,8 @@ var getValues = function () {
 
 var cityMap = document.querySelector('.map');
 function hideMap () {
-cityMap.classlist.remove('.map--faded');
+  debugger;
+cityMap = document.classlist.remove('.map--faded');
 }
 hideMap ();
 
@@ -93,7 +94,7 @@ var renderPins = function(arr) {
   return fragment;
 };
 
-function () {
+(function () {
   var IMG_WIDTH = 45;
   var IMG_HEIGHT = 40;
   var IMG_ALT = 'Фотография жилья';
@@ -112,10 +113,10 @@ function () {
   var createPhotoItem = function (item) {
     var photoItem = document.createElement('img');
     photoItem.src = item;
-    photoItem.width = imgwidht;
-    photoItem.height = imgheight;
+    photoItem.width = imgWidht;
+    photoItem.height = imgHeight;
     photoItem.classList.add('popup__photo');
-    photoItem.alt = imgalt;
+    photoItem.alt = imgAlt;
     return photoItem;
   };
 
@@ -180,4 +181,4 @@ function () {
     fragment.appendChild(createCardItem(ad));
     return fragment;
   };
-}();
+})();
