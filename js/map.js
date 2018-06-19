@@ -61,11 +61,12 @@ var getValues = function () {
 
 
 var cityMap = document.querySelector('.map');
-function hideMap () {
-  debugger;
-cityMap = document.classlist.remove('.map--faded');
-}
-hideMap ();
+var hideMap = function () {
+cityMap.classlist.remove('map--faded');
+ return hideMap;
+};
+
+
 
 var template = document.querySelector('template');
 var pinTemplate = template.content.querySelector('.map__pin');
@@ -86,10 +87,11 @@ var makePinItem = function(ad) {
 };
 
 var renderPins = function(arr) {
+  debugger;
   var fragment = createDocumentFragment();
 
-  arr.forEach(function(it) {
-    fragment.appendChild(makePinItem(it));
+  arr.forEach(function(arr) {
+    fragment.appendChild(makePinItem(arr));
   });
   return fragment;
 };
@@ -176,9 +178,13 @@ var renderPins = function(arr) {
     return cardItem;
   };
 
-   var renderCard = function (ad) {
+  var renderCard = function (ad) {
     var fragment = document.createDocumentFragment();
     fragment.appendChild(createCardItem(ad));
     return fragment;
+  };
+
+  var openCardItem = function (ad) {
+  map.insertBefore(renderCard(ad), map.querySelector('.map__filters-container'));
   };
 })();
