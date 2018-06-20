@@ -168,7 +168,7 @@ var createCardItem = function (ad) {
 
 var renderCard = function (ad) {
   var fragment = document.createDocumentFragment();
-  fragment.appendChild(createCardItem(ad));
+    fragment.appendChild(createCardItem(ad));
   return fragment;
 };
 
