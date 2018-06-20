@@ -21,7 +21,7 @@ var createOffer = function (i) {
       title: TITLES[i],
       type: getItrValue(TYPES),
       address: locationX + ',' + locationY,
-      price: getRandomNumber (1000, 1000000),
+      price: getRandomNumber(1000, 1000000),
       features: getRandomArrayElements(),
       rooms: getRandomNumber(1, 5),
       guests: getRandomNumber(1, 25),
@@ -42,7 +42,7 @@ var getRandomNumber = function (min, max) {
 };
 
 var getItrValue = function (arr) {
-  var randomIndex = getRandomNumber (0, arr.length - 1);
+  var randomIndex = getRandomNumber(0, arr.length - 1);
   return arr[randomIndex];
 };
 
@@ -87,11 +87,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (value) {
+var renderPins = function (it) {
   var fragment = document.createDocumentFragment();
 
-  value.forEach(function (value) {
-    fragment.appendChild(makePinItem(value));
+  it.forEach(function (it) {
+    fragment.appendChild(makePinItem(it));
   });
   return fragment;
 };
