@@ -10,26 +10,6 @@ var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-var getRandomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-
-var getItrValue = function (arr) {
-
-  var randomIndex = getRandomNumber (0, arr.length - 1);
-  return arr[randomIndex];
-};
-
-var getRandomArrayElements = function () {
-  var elements = [];
-  for (var i = 0; i < FEATURES.length; i++) {
-    if (Math.random() > 0.5) {
-      elements.push(FEATURES[i]);
-    }
-  }
-  return elements;
-};
-
 var createOffer = function (i) {
   var locationX = getRandomNumber(300, 900);
   var locationY = getRandomNumber(130, 630);
@@ -56,6 +36,26 @@ var createOffer = function (i) {
     }
   };
 };
+
+var getRandomNumber = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+var getItrValue = function (arr) {
+  var randomIndex = getRandomNumber (0, arr.length - 1);
+  return arr[randomIndex];
+};
+
+var getRandomArrayElements = function () {
+  var elements = [];
+  for (var i = 0; i < FEATURES.length; i++) {
+    if (Math.random() > 0.5) {
+      elements.push(FEATURES[i]);
+    }
+  }
+  return elements;
+};
+
 
 var getOffers = function (countOfOffers) {
   var offers = [];
@@ -88,11 +88,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (adsArray) {
+var renderPins = function (adsOfArray) {
   var fragment = document.createDocumentFragment();
 
-  adsArray.forEach(function (adsArray) {
-    fragment.appendChild(makePinItem(adsArray));
+  adsOfArray.forEach(function (adsOfArray) {
+    fragment.appendChild(makePinItem(adsOfArray));
   });
   return fragment;
 };
