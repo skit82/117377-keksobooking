@@ -4,7 +4,7 @@ var OFFERS_COUNT = 8;
 var IMG_WIDTH = 45;
 var IMG_HEIGHT = 40;
 var IMG_ALT = 'Фотография жилья';
-var TITLES = ["Большая уютная квартира", "Маленькая неуютная квартира", "Огромный прекрасный дворец", "Маленький ужасный дворец", "Красивый гостевой домик", "Некрасивый негостеприимный домик", "Уютное бунгало далеко от моря", "Неуютное бунгало по колено в воде"];
+var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
@@ -168,8 +168,8 @@ var createCardItem = function (ad) {
 
 var renderCard = function (ad) {
   var fragment = document.createDocumentFragment();
-    fragment.appendChild(createCardItem(ad));
-      return fragment;
+  fragment.appendChild(createCardItem(ad));
+  return fragment;
 };
 
 var openCardItem = function (ad) {
