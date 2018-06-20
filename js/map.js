@@ -1,3 +1,4 @@
+'use strict'
 
 var OFFERS_COUNT = 8;
 var IMG_WIDTH = 45;
@@ -131,7 +132,7 @@ var createCollectionFromArray = function (array, renderFunction) {
   array.forEach(function (item) {
     fragment.appendChild(renderFunction(item));
   });
-    return fragment;
+  return fragment;
 };
 
 var removeChildren = function (parent) {
@@ -151,16 +152,16 @@ var createCardItem = function (ad) {
   cardItem.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
   switch (ad.offer.type) {
     case 'flat':
-      cardItemTypesItem.textContent = 'Квартира';
+    cardItemTypesItem.textContent = 'Квартира';
     break;
     case 'bungalo':
-      cardItemTypesItem.textContent = 'Бунгало';
+    cardItemTypesItem.textContent = 'Бунгало';
     break;
     case 'house':
-      cardItemTypesItem.textContent = 'Дом';
+    cardItemTypesItem.textContent = 'Дом';
     break;
     case 'palace':
-      cardItemTypesItem.textContent = 'Дворец';
+    cardItemTypesItem.textContent = 'Дворец';
     break;
   };
 
@@ -187,7 +188,7 @@ var renderCard = function (ad) {
 
 var openCardItem = function (ad) {
   map.insertBefore(renderCard(ad),
-  map.querySelector('.map__filters-container'));
+    map.querySelector('.map__filters-container'));
 };
 
 mapPinsContainer.appendChild(pinsFragment);
