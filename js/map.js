@@ -15,6 +15,7 @@ var getRandomNumber = function (min, max) {
 };
 
 var getItrValue = function (arr) {
+
   var randomIndex = getRandomNumber (0, arr.length - 1);
   return arr[randomIndex];
 };
@@ -53,7 +54,7 @@ var createOffer = function (i) {
       x: locationX,
       y: locationY
     }
-  }
+  };
 };
 
 var getOffers = function (countOfOffers) {
@@ -87,11 +88,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (arrd) {
+var renderPins = function (adsArray) {
   var fragment = document.createDocumentFragment();
 
-  arrd.forEach(function (arrd) {
-    fragment.appendChild(makePinItem(arrd));
+  adsArray.forEach(function (adsArray) {
+    fragment.appendChild(makePinItem(adsArray));
   });
   return fragment;
 };
