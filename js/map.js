@@ -86,11 +86,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (arrdes) {
+var renderPins = function (arrd) {
   var fragment = document.createDocumentFragment();
 
-  arrdes.forEach(function (arrdes) {
-    fragment.appendChild(makePinItem(arrdes));
+  arrd.forEach(function (arrd) {
+    fragment.appendChild(makePinItem(arrd));
   });
   return fragment;
 };
