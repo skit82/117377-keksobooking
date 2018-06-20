@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var OFFERS_COUNT = 8;
 var IMG_WIDTH = 45;
