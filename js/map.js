@@ -151,7 +151,7 @@ var createCardItem = function (ad) {
     case 'palace':
       cardItemTypesItem.textContent = 'Дворец';
       break;
-  };
+  }
 
   cardItem.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
   cardItem.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
@@ -169,7 +169,7 @@ var createCardItem = function (ad) {
 var renderCard = function (ad) {
   var fragment = document.createDocumentFragment();
     fragment.appendChild(createCardItem(ad));
-  return fragment;
+      return fragment;
 };
 
 var openCardItem = function (ad) {
