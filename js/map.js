@@ -140,17 +140,17 @@ var createCardItem = function (ad) {
   cardItem.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
   switch (ad.offer.type) {
     case 'flat':
-    cardItemTypesItem.textContent = 'Квартира';
-    break;
+      cardItemTypesItem.textContent = 'Квартира';
+        break;
     case 'bungalo':
-    cardItemTypesItem.textContent = 'Бунгало';
-    break;
+      cardItemTypesItem.textContent = 'Бунгало';
+        break;
     case 'house':
-    cardItemTypesItem.textContent = 'Дом';
-    break;
+      cardItemTypesItem.textContent = 'Дом';
+        break;
     case 'palace':
-    cardItemTypesItem.textContent = 'Дворец';
-    break;
+      cardItemTypesItem.textContent = 'Дворец';
+        break;
   };
 
   cardItem.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
