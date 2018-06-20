@@ -71,13 +71,10 @@ var hideMap = function () {
 };
 hideMap();
 
-
-
 var template = document.querySelector('template');
 var pinTemplate = template.content.querySelector('.map__pin');
 var map = document.querySelector('.map');
 var mapPinsContainer = document.querySelector('.map__pins');
-
 
 var makePinItem = function(ad) {
   var pinItem = pinTemplate.cloneNode(true);
@@ -99,7 +96,6 @@ var renderPins = function(arr) {
   return fragment;
 };
 var pinsFragment = renderPins(offersArray);
-
 
 var cardTemplate = template.content.querySelector('.map__card');
 
@@ -181,5 +177,6 @@ var openCardItem = function (ad) {
   map.insertBefore(renderCard(ad),
     map.querySelector('.map__filters-container'));
 };
+
 mapPinsContainer.appendChild(pinsFragment);
 openCardItem(offersArray[0]);
