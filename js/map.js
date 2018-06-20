@@ -63,15 +63,12 @@ var getOffers = function (countOfOffers) {
   }
   return offers;
 };
-
 var offersArray = getOffers(OFFERS_COUNT);
-
 
 var hideMap = function () {
   var cityMap = document.querySelector('.map');
   cityMap.classList.remove('map--faded');
 };
-
 hideMap();
 
 
@@ -90,7 +87,6 @@ var makePinItem = function(ad) {
   pinItem.style.top = ad.location.y + 'px';
   pinAvatar.src = ad.author.avatar;
   pinAvatar.alt = ad.offer.title;
-
   return pinItem;
 };
 
@@ -102,7 +98,6 @@ var renderPins = function(arr) {
   });
   return fragment;
 };
-
 var pinsFragment = renderPins(offersArray);
 
 
@@ -112,7 +107,6 @@ var createFeatureItem = function (item) {
   var featureItem = document.createElement('li');
   featureItem.classList.add('popup__feature');
   featureItem.classList.add('popup__feature--' + item);
-
   return featureItem;
 };
 
@@ -123,7 +117,6 @@ var createPhotoItem = function (item) {
   photoItem.height = IMG_HEIGHT;
   photoItem.classList.add('popup__photo');
   photoItem.alt = IMG_ALT;
-
   return photoItem;
 };
 
@@ -175,14 +168,12 @@ var createCardItem = function (ad) {
   removeChildren(cardItemPhotosItem);
   cardItemPhotosItem.appendChild(createCollectionFromArray(ad.offer.photos, createPhotoItem));
   cardItem.querySelector('.popup__avatar').src = ad.author.avatar;
-
   return cardItem;
 };
 
 var renderCard = function (ad) {
   var fragment = document.createDocumentFragment();
   fragment.appendChild(createCardItem(ad));
-
   return fragment;
 };
 
@@ -190,7 +181,5 @@ var openCardItem = function (ad) {
   map.insertBefore(renderCard(ad),
     map.querySelector('.map__filters-container'));
 };
-
 mapPinsContainer.appendChild(pinsFragment);
-
 openCardItem(offersArray[0]);
