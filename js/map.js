@@ -17,7 +17,6 @@ var getItrValue = function (arr) {
   var randomIndex = getRandomNumber (0, arr.length - 1);
   return arr[randomIndex];
 };
-
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var getRandomArrayElements = function () {
   var elements = [];
@@ -76,7 +75,7 @@ var pinTemplate = template.content.querySelector('.map__pin');
 var map = document.querySelector('.map');
 var mapPinsContainer = document.querySelector('.map__pins');
 
-var makePinItem = function(ad) {
+var makePinItem = function (ad) {
   var pinItem = pinTemplate.cloneNode(true);
   var pinAvatar = pinItem.querySelector('img');
 
@@ -87,10 +86,10 @@ var makePinItem = function(ad) {
   return pinItem;
 };
 
-var renderPins = function(arr) {
+var renderPins = function (arr) {
   var fragment = document.createDocumentFragment();
 
-  arr.forEach(function(arr) {
+  arr.forEach(function (arr) {
     fragment.appendChild(makePinItem(arr));
   });
   return fragment;
