@@ -56,7 +56,6 @@ var getRandomArrayElements = function () {
   return elements;
 };
 
-
 var getOffers = function (countOfOffers) {
   var offers = [];
   for (var i = 0; i < countOfOffers; i++) {
@@ -88,11 +87,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (adsPins) {
+var renderPins = function (pins) {
   var fragment = document.createDocumentFragment();
 
-  adsPins.forEach(function (adsPins) {
-    fragment.appendChild(makePinItem(adsPins));
+  pins.forEach(function (pins) {
+    fragment.appendChild(makePinItem(pins));
   });
   return fragment;
 };
@@ -175,8 +174,7 @@ var renderCard = function (ad) {
 };
 
 var openCardItem = function (ad) {
-  map.insertBefore(renderCard(ad),
-  map.querySelector('.map__filters-container'));
+  map.insertBefore(renderCard(ad), map.querySelector('.map__filters-container'));
 };
 
 mapPinsContainer.appendChild(pinsFragment);
