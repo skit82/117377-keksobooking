@@ -8,6 +8,7 @@ var TITLES = ['Большая уютная квартира', 'Маленька�
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -17,7 +18,7 @@ var getItrValue = function (arr) {
   var randomIndex = getRandomNumber (0, arr.length - 1);
   return arr[randomIndex];
 };
-var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
 var getRandomArrayElements = function () {
   var elements = [];
   for (var i = 0; i < FEATURES.length; i++) {
