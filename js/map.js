@@ -57,7 +57,7 @@ var createOffer = function (i) {
 
 var getOffers = function (countOfOffers) {
   var offers = [];
-  for ( var i = 0; i < countOfOffers; i++) {
+  for (var i = 0; i < countOfOffers; i++) {
     offers.push(createOffer(i));
   }
   return offers;
