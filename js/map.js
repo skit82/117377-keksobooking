@@ -90,8 +90,8 @@ var makePinItem = function (ad) {
 var renderPins = function (list) {
   var fragment = document.createDocumentFragment();
 
-  list.forEach(function (list) {
-    fragment.appendChild(makePinItem(list));
+  list.forEach(function (it) {
+    fragment.appendChild(makePinItem(it));
   });
   return fragment;
 };
