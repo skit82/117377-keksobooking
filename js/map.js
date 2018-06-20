@@ -141,16 +141,16 @@ var createCardItem = function (ad) {
   switch (ad.offer.type) {
     case 'flat':
       cardItemTypesItem.textContent = 'Квартира';
-        break;
+      break;
     case 'bungalo':
       cardItemTypesItem.textContent = 'Бунгало';
-        break;
+      break;
     case 'house':
       cardItemTypesItem.textContent = 'Дом';
-        break;
+      break;
     case 'palace':
       cardItemTypesItem.textContent = 'Дворец';
-        break;
+      break;
   };
 
   cardItem.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
