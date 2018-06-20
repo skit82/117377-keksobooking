@@ -88,11 +88,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (adsOfArray) {
+var renderPins = function (adsPins) {
   var fragment = document.createDocumentFragment();
 
-  adsOfArray.forEach(function (adsOfArray) {
-    fragment.appendChild(makePinItem(adsOfArray));
+  adsPins.forEach(function (adsPins) {
+    fragment.appendChild(makePinItem(adsPins));
   });
   return fragment;
 };
@@ -176,7 +176,7 @@ var renderCard = function (ad) {
 
 var openCardItem = function (ad) {
   map.insertBefore(renderCard(ad),
-    map.querySelector('.map__filters-container'));
+  map.querySelector('.map__filters-container'));
 };
 
 mapPinsContainer.appendChild(pinsFragment);
