@@ -19,14 +19,14 @@ var createOffer = function (i) {
     },
     offer: {
       title: TITLES[i],
-      type: getItrValue (TYPES),
+      type: getItrValue(TYPES),
       address: locationX + ',' + locationY,
       price: getRandomNumber (1000, 1000000),
-      features: getRandomArrayElements (),
-      rooms: getRandomNumber (1, 5),
-      guests: getRandomNumber (1, 25),
-      checkin: getItrValue (CHECKIN_HOURS),
-      checkout: getItrValue (CHECKOUT_HOURS),
+      features: getRandomArrayElements(),
+      rooms: getRandomNumber(1, 5),
+      guests: getRandomNumber(1, 25),
+      checkin: getItrValue(CHECKIN_HOURS),
+      checkout: getItrValue(CHECKOUT_HOURS),
       description: '',
       photos: []
     },
@@ -87,11 +87,11 @@ var makePinItem = function (ad) {
   return pinItem;
 };
 
-var renderPins = function (adr) {
+var renderPins = function (value) {
   var fragment = document.createDocumentFragment();
 
-  adr.forEach(function (adr) {
-    fragment.appendChild(makePinItem(adr));
+  value.forEach(function (value) {
+    fragment.appendChild(makePinItem(value));
   });
   return fragment;
 };
