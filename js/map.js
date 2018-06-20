@@ -33,20 +33,20 @@ var createOffer = function (i) {
   var locationX = getRandomNumber(300, 900);
   var locationY = getRandomNumber(130, 630);
   return {
-    author: {
+    'author': {
       avatar: 'img/avatars/user0' + (i + 1) + '.png'
     },
     offer: {
-      title: TITLES[i],
-      type: getItrValue (TYPES),
-      address: locationX + ',' + locationY,
+      'title': TITLES[i],
+      'type': getItrValue (TYPES),
+      'address': locationX + ',' + locationY,
       price: getRandomNumber (1000, 1000000),
       features: getRandomArrayElements (),
       rooms: getRandomNumber (1, 5),
       guests: getRandomNumber (1, 25),
-      checkin: getItrValue (CHECKIN_HOURS),
-      checkout: getItrValue (CHECKOUT_HOURS),
-      description: '',
+      'checkin': getItrValue (CHECKIN_HOURS),
+      'checkout': getItrValue (CHECKOUT_HOURS),
+      'description': '',
       photos: []
     },
     location: {
