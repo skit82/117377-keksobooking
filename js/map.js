@@ -232,7 +232,7 @@ var onCloseCardItemClick = function () {
   if (closeCardItem) {
     closeCardItem.removeEventListener('click', onCloseCardItemClick);
   }
-     mapCard.remove();
+    mapCard.remove();
   }
   var currentPin = map.querySelector('.map__pin--active');
   if (currentPin) {
