@@ -220,14 +220,14 @@ var openCardItem = function (ad) {
 var onCloseCardItemClick = function () {
   var mapCard = map.querySelector('.map__card');
   if (mapCard) {
-  var closeCardItem = mapCard.querySelector('.popup__close');
-  if (closeCardItem) {
-    closeCardItem.removeEventListener('click', onCloseCardItemClick);
-  }
+    var closeCardItem = mapCard.querySelector('.popup__close');
+    if (closeCardItem) {
+      closeCardItem.removeEventListener('click', onCloseCardItemClick);
+    }
     mapCard.remove();
   }
   var currentPin = map.querySelector('.map__pin--active');
   if (currentPin) {
-  currentPin.classList.remove('map__pin--active');
+    currentPin.classList.remove('map__pin--active');
   }
 };
