@@ -75,7 +75,6 @@ var pageState = 'disabled';
 var addressInput = document.querySelector('#address');
 
 addressInput.value = 'x, y';
- debugger;
 var enablePageState = function () {
   map.classList.remove('map--faded');
   pageState = 'enabled';
@@ -100,18 +99,11 @@ var onMapPinMainMouseDown = function (evt) {
 
     document.addEventListener('mouseup', onDocumentMouseUp);
   };
-    document.addEventListener('mousemove', onDocumentMouseMove);
+  document.addEventListener('mousemove', onDocumentMouseMove);
 };
 
 mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
 
-var reset = function () {
-  map.classList.add('map--faded');
-  adForm.reset();
-  removePins();
-  onCloseCardItemClick();
-  pageState = 'disabled';
-};
 
 var removePins = function () {
   var pins = mapPinsContainer.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -233,7 +225,6 @@ var openCardItem = function (ad) {
   map.insertBefore(renderCard(ad), map.querySelector('.map__filters-container'));
 };
 
-
 var onCloseCardItemClick = function () {
   var mapCard = map.querySelector('.map__card');
   if (mapCard) {
@@ -245,6 +236,6 @@ var onCloseCardItemClick = function () {
   }
   var currentPin = map.querySelector('.map__pin--active');
   if (currentPin) {
-    currentPin.classList.remove('map__pin--active');
+  currentPin.classList.remove('map__pin--active');
   }
 };
