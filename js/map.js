@@ -104,14 +104,6 @@ var onMapPinMainMouseDown = function (evt) {
 
 mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
 
-
-var removePins = function () {
-  var pins = mapPinsContainer.querySelectorAll('.map__pin:not(.map__pin--main)');
-    pins.forEach(function (pin) {
-    pin.remove();
-  });
-};
-
 var makePinItem = function (ad) {
   var pinItem = pinTemplate.cloneNode(true);
   var pinAvatar = pinItem.querySelector('img');
