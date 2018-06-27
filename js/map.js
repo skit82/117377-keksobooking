@@ -82,6 +82,15 @@ var enablePageState = function () {
   mapPinsContainer.appendChild(pinsFragment);
 };
 
+var getCoords = function (x, y) {
+  var box = mapPinMain.getCoords();
+
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
+
 var onMapPinMainMouseDown = function (evt) {
   evt.preventDefault();
   var onDocumentMouseMove = function (moveEvt) {
@@ -92,7 +101,7 @@ var onMapPinMainMouseDown = function (evt) {
       if (pageState === 'disabled') {
         enablePageState();
       }
-      addressInput.value = '100, 100';
+      getCoords();
       document.removeEventListener('mousemove', onDocumentMouseMove);
       document.removeEventListener('mouseup', onDocumentMouseUp);
     };
