@@ -8,21 +8,26 @@ var TITLES = ['Большая уютная квартира', 'Маленька�
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var PRICES = [0, 1000, 5000, 10000];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var VALID_CAPACITY_TEXT = 'Выберите допустимое количество гостей';
 var TIMEOUT = 2000;
 var ENABLE_FORM_FIELDS = false;
 var DISABLE_FORM_FIELDS = true;
 var SELECTED_ROOM_IMDEX = 0;
-var VALID_CAPACITY = {
-  '1': ['1'],
-  '2': ['1', '2'],
-  '3': ['1', '2', '3'],
-  '100': ['0']
-};
 var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 var AVATAR_DAFAULT_SRC = 'img/muffin-grey.svg';
 var IMG_MARGIN = '3px';
+var PIN_HALF_HEIGHT = 42;
+var PIN_HALF_WIDTH = 31;
+var MIN_COORD = {
+  X: 300 - PIN_HALF_WIDTH,
+  Y: 100 - PIN_HALF_HEIGHT
+};
+var MAX_COORD = {
+  X: 900 - PIN_HALF_WIDTH,
+  Y: 500 - PIN_HALF_HEIGHT
+};
 
 var createOffer = function (i) {
   var locationX = getRandomNumber(300, 900);
@@ -86,14 +91,15 @@ var mapPinsContainer = document.querySelector('.map__pins');
 var mapPinMain = document.querySelector('.map__pin--main');
 var pageState = 'disabled';
 var adForm = document.querySelector('.ad-form');
+var title = document.querySelector('#title');
 var addressInput = document.querySelector('#address');
 var fieldsetForm = document.querySelectorAll('fieldset');
-var adFormType = adForm.querySelector('#type');
-var adFormPrice = adForm.querySelector('#price');
-var adFormCheckIn = adForm.querySelector('#timein');
-var adFormCheckOut = adForm.querySelector('#timeout');
-var adFormRoomsNumber = adForm.querySelector('#room_number');
-var adFormCapacity = adForm.querySelector('#capacity');
+var type = document.querySelector('#type');
+var priceInput = document.querySelector('#price');
+var timeIn = document.querySelector('#timein');
+var timeOut = document.querySelector('#timeout');
+var roomNumber = document.querySelector('#room_number');
+var roomCapacity = document.querySelector('#capacity');
 var buttonReset = adForm.querySelector('.ad-form__reset');
 var avatarInput = document.querySelector('.ad-form input[name="avatar"]');
 var avatar = document.querySelector('.ad-form-header__preview img');
@@ -102,12 +108,6 @@ var photoBox = document.querySelector('.ad-form__photo');
 var avatarDropZone = document.querySelector('.ad-form-header__drop-zone');
 var photoDropZone = document.querySelector('.ad-form__drop-zone');
 
-var AdTypePrices = {
-  palace: 10000,
-  flat: 1000,
-  house: 5000,
-  bungalo: 0
-};
 
 var AdFormPhoto = {
   WIDTH: 70,
@@ -117,22 +117,111 @@ var AdFormPhoto = {
 
 var draggedItemElement;
 
-var checkFileOnImg = function (file) {
-  var fileName = file.name.toLowerCase();
+var addDisabledFieldset = function () {
+  for (var i = 0; i < fieldsetForm.length; i++) {
+    fieldsetForm[i].disabled = true;
+  }
+};
+addDisabledFieldset();
 
-  return FILE_TYPES.some(function (it) {
-    return fileName.endsWith(it);
-  });
+var removeDisabledFieldset = function () {
+  for (var i = 0; i < fieldsetForm.length; i++) {
+    fieldsetForm[i].removeAttribute('disabled');
+  }
+};
+removeDisabledFieldset();
+
+var titleInvalidHandler = function () {
+  if (title.validity.tooShort) {
+    title.setAttribute('style', 'border-color: red');
+  } else if (title.validity.tooLong) {
+    title.setAttribute('style', 'border-color: red');
+  } else if (title.validity.valueMissing) {
+    title.setAttribute('style', 'border-color: red');
+  } else {
+    title.setCustomValidity('');
+    title.removeAttribute('style');
+  }
+};
+title.addEventListener('invalid', titleInvalidHandler);
+
+var priceInputInvalidHandler = function () {
+  if (priceInput.validity.rangeUnderflow) {
+    priceInput.setAttribute('style', 'border-color: red');
+  } else if (priceInput.validity.rangeOverflow) {
+    priceInput.setAttribute('style', 'border-color: red');
+  } else if (priceInput.validity.typeMismatch) {
+    priceInput.setAttribute('style', 'border-color: red');
+  } else {
+    priceInput.removeAttribute('style');
+  }
 };
 
-var renderImage = function (file, elem) {
-  var reader = new FileReader();
+var synchronizeFields = function (firstElement, secondElement, firstValue, secondValue, callback) {
+  var firstElementChangeHandler = function () {
+    var newFirstValue = secondValue[firstValue.indexOf(firstElement.value)];
+    callback(secondElement, newFirstValue);
+  };
+  firstElement.addEventListener('change', firstElementChangeHandler);
 
-  reader.addEventListener('load', function () {
-    elem.src = reader.result;
+  var secondElementChangeHandler = function () {
+    var newSecondValue = firstValue[secondValue.indexOf(secondElement.value)];
+    callback(firstElement, newSecondValue);
+  };
+  secondElement.addEventListener('change', secondElementChangeHandler);
+};
+
+var syncValues = function (element, value) {
+  element.value = value;
+};
+synchronizeFields(timeIn, timeOut, syncValues);
+
+var syncValueWithMin = function (element, value) {
+  element.min = value;
+};
+synchronizeFields(type, priceInput, TYPES, PRICES, syncValueWithMin);
+priceInput.addEventListener('invalid', priceInputInvalidHandler);
+
+var disableRoomSelects = function () {
+  for (var i = 0; i < roomCapacity.length; i++) {
+    roomCapacity[i].disabled = true;
+  }
+};
+
+var roomNumberChangeHandler = function (evt) {
+  disableRoomSelects();
+  var choosenValue = (evt.target.value === '100') ? '0' : evt.target.value;
+  for (var i = 0; i < roomCapacity.length; i++) {
+    if (roomCapacity[i].value === choosenValue) {
+      roomCapacity[i].disabled = false;
+    }
+    if (roomCapacity[i].value <= choosenValue && roomCapacity[i].value > 0) {
+      roomCapacity[i].disabled = false;
+    }
+  }
+};
+
+roomNumber.addEventListener('change', roomNumberChangeHandler);
+
+var setImage = function (fileChooser, callback) {
+  fileChooser.addEventListener('change', function () {
+    var file = fileChooser.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var similars = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (similars) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        callback(reader.result);
+      });
+
+      reader.readAsDataURL(file);
+    }
   });
-
-  reader.readAsDataURL(file);
 };
 
 var createHousingPhotosFragment = function (element) {
@@ -249,34 +338,11 @@ var removeAdFormPhotos = function () {
   });
 };
 
-var onRoomNumberFieldChange = function () {
-  if (adFormCapacity.options.length > 0) {
-    [].forEach.call(adFormCapacity.options, function (item) {
-      item.selected = VALID_CAPACITY[adFormRoomsNumber.value][SELECTED_ROOM_IMDEX] === item.value;
-      item.disabled = VALID_CAPACITY[adFormRoomsNumber.value].indexOf(item.value) === -1;
-    });
-  }
-};
-
-var onTimeInFieldChange = function () {
-  adFormCheckOut.options.selectedIndex = adFormCheckIn.options.selectedIndex;
-};
-
-var onTimeOutFieldChange = function () {
-  adFormCheckIn.options.selectedIndex = adFormCheckOut.options.selectedIndex;
-};
-
 var enablePageState = function () {
   map.classList.remove('map--faded');
   pageState = 'enabled';
   adForm.classList.remove('ad-form--disabled');
   mapPinsContainer.appendChild(pinsFragment);
-};
-
-var onTypeFieldChange = function () {
-  var typeSelectedValue = adFormType.options[adFormType.selectedIndex].value;
-  adFormPrice.placeholder = AdTypePrices[typeSelectedValue];
-  adFormPrice.min = AdTypePrices[typeSelectedValue];
 };
 
 var onButtonResetClick = function () {
@@ -299,8 +365,8 @@ var onSuccess = function () {
 };
 
 var onAdFormSubmit = function (evt) {
-  if (onRoomNumberFieldChange.disabled) {
-    adFormCapacity.setCustomValidity(VALID_CAPACITY_TEXT);
+  if (roomNumberChangeHandler.disabled) {
+    roomCapacity.setCustomValidity(VALID_CAPACITY_TEXT);
     return;
   }
   evt.preventDefault();
@@ -327,33 +393,66 @@ var reset = function () {
   adForm.removeEventListener('submit', onAdFormSubmit);
   buttonReset.removeEventListener('click', onButtonResetClick);
   photoInput.removeEventListener('change', createHousingPhotosFragment);
-  changeAdFormFieldsState(DISABLE_FORM_FIELDS);
-  setAddressFieldValue();
+
   removeAdFormPhotos();
   adForm.classList.add('ad-form--disabled');
 };
 
-addressInput.value = 'x, y';
-var getCoords = function (x, y) {
-  var box = mapPinMain.getCoords();
+var setAddress = function (xCoord, yCoord) {
+  var addressString = 'x: ' + xCoord + ', ' + 'y: ' + yCoord;
 
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
-}
+  addressInput.setAttribute('value', addressString);
+};
 
 var onMapPinMainMouseDown = function (evt) {
   evt.preventDefault();
+
+  var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+  };
+
   var onDocumentMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
+
+    var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      var coordinates = {
+        x: mapPinMain.offsetLeft - shift.x,
+        y: mapPinMain.offsetTop - shift.y
+      };
+
+      if (coordinates.x < MIN_COORD.X) {
+        coordinates.x = MIN_COORD.X;
+      } else if (coordinates.x > MAX_COORD.X) {
+        coordinates.x = MAX_COORD.X;
+      }
+
+      if (coordinates.y < MIN_COORD.Y) {
+        coordinates.y = MIN_COORD.Y;
+      } else if (coordinates.y > MAX_COORD.Y) {
+        coordinates.y = MAX_COORD.Y;
+      }
+
+      mapPinMain.style.top = coordinates.y + 'px';
+      mapPinMain.style.left = coordinates.x + 'px';
+
+      setAddress(coordinates.x, coordinates.y);
 
     var onDocumentMouseUp = function (upEvt) {
       upEvt.preventDefault();
       if (pageState === 'disabled') {
         enablePageState();
       }
-      getCoords();
+
       document.removeEventListener('mousemove', onDocumentMouseMove);
       document.removeEventListener('mouseup', onDocumentMouseUp);
     };
