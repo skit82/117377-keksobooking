@@ -7,7 +7,8 @@ var IMG_ALT = 'Фотография жилья';
 var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
-var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var TIMES = ['12:00', '13:00', '14:00'];
+var TYPES = ['bungalo', 'flat', 'house', 'palace'];
 var PRICES = [0, 1000, 5000, 10000];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var VALID_CAPACITY_TEXT = 'Выберите допустимое количество гостей';
@@ -132,11 +133,7 @@ var removeDisabledFieldset = function () {
 removeDisabledFieldset();
 
 var titleInvalidHandler = function () {
-  if (title.validity.tooShort) {
-    title.setAttribute('style', 'border-color: red');
-  } else if (title.validity.tooLong) {
-    title.setAttribute('style', 'border-color: red');
-  } else if (title.validity.valueMissing) {
+  if (title.validity.tooShort && title.validity.tooLong && title.validity.valueMissing) {
     title.setAttribute('style', 'border-color: red');
   } else {
     title.setCustomValidity('');
@@ -146,11 +143,7 @@ var titleInvalidHandler = function () {
 title.addEventListener('invalid', titleInvalidHandler);
 
 var priceInputInvalidHandler = function () {
-  if (priceInput.validity.rangeUnderflow) {
-    priceInput.setAttribute('style', 'border-color: red');
-  } else if (priceInput.validity.rangeOverflow) {
-    priceInput.setAttribute('style', 'border-color: red');
-  } else if (priceInput.validity.typeMismatch) {
+  if (priceInput.validity.rangeUnderflow && priceInput.validity.rangeOverflow && priceInput.validity.typeMismatch) {
     priceInput.setAttribute('style', 'border-color: red');
   } else {
     priceInput.removeAttribute('style');
@@ -174,7 +167,7 @@ var synchronizeFields = function (firstElement, secondElement, firstValue, secon
 var syncValues = function (element, value) {
   element.value = value;
 };
-synchronizeFields(timeIn, timeOut, syncValues);
+synchronizeFields(timeIn, timeOut, TIMES, TIMES, syncValues);
 
 var syncValueWithMin = function (element, value) {
   element.min = value;
