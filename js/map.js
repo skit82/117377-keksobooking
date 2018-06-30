@@ -14,8 +14,6 @@ var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditio
 var VALID_CAPACITY_TEXT = 'Выберите допустимое количество гостей';
 var TIMEOUT = 2000;
 var ENABLE_FORM_FIELDS = false;
-var DISABLE_FORM_FIELDS = true;
-var SELECTED_ROOM_IMDEX = 0;
 var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 var AVATAR_DAFAULT_SRC = 'img/muffin-grey.svg';
 var IMG_MARGIN = '3px';
@@ -234,7 +232,7 @@ var createHousingPhotosFragment = function (element) {
       imgElement.style.marginRight = IMG_MARGIN;
 
       fragment.appendChild(imgElement);
-      }
+    }
   });
   return fragment;
 };
@@ -311,9 +309,9 @@ photoBox.addEventListener('drop', function (evt) {
       if (target.offsetLeft < draggedItemElement.offsetLeft) {
         target.insertAdjacentElement('beforebegin', draggedItemElement);
       } else if (target.offsetLeft > draggedItemElement.offsetLeft) {
-          target.insertAdjacentElement('afterend', draggedItemElement);
-        }
-    } else {
+        target.insertAdjacentElement('afterend', draggedItemElement);
+      }
+      } else {
       if (target.offsetTop < draggedItemElement.offsetTop) {
         target.insertAdjacentElement('beforebegin', draggedItemElement);
       } else if (target.offsetTop > draggedItemElement.offsetTop) {
@@ -368,7 +366,6 @@ var onAdFormSubmit = function (evt) {
 var init = function () {
   adFormType.addEventListener('change', onTypeFieldChange);
   adFormCheckIn.addEventListener('change', onTimeInFieldChange);
-  adFormCheckOut.addEventListener('change', onTimeOutFieldChange);
   adFormRoomsNumber.addEventListener('change', onRoomNumberFieldChange);
   changeAdFormFieldsState(ENABLE_FORM_FIELDS);
   buttonReset.addEventListener('click', onButtonResetClick);
