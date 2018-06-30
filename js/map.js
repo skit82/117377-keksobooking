@@ -401,44 +401,44 @@ var onMapPinMainMouseDown = function (evt) {
   evt.preventDefault();
 
   var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
+    x: evt.clientX,
+    y: evt.clientY
   };
 
   var onDocumentMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
 
     var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
 
-      var coordinates = {
-        x: mapPinMain.offsetLeft - shift.x,
-        y: mapPinMain.offsetTop - shift.y
-      };
+    var coordinates = {
+      x: mapPinMain.offsetLeft - shift.x,
+      y: mapPinMain.offsetTop - shift.y
+    };
 
-      if (coordinates.x < MIN_COORD.X) {
-        coordinates.x = MIN_COORD.X;
-      } else if (coordinates.x > MAX_COORD.X) {
-        coordinates.x = MAX_COORD.X;
-      }
+    if (coordinates.x < MIN_COORD.X) {
+      coordinates.x = MIN_COORD.X;
+    } else if (coordinates.x > MAX_COORD.X) {
+      coordinates.x = MAX_COORD.X;
+    }
 
-      if (coordinates.y < MIN_COORD.Y) {
-        coordinates.y = MIN_COORD.Y;
-      } else if (coordinates.y > MAX_COORD.Y) {
-        coordinates.y = MAX_COORD.Y;
-      }
+    if (coordinates.y < MIN_COORD.Y) {
+      coordinates.y = MIN_COORD.Y;
+    } else if (coordinates.y > MAX_COORD.Y) {
+      coordinates.y = MAX_COORD.Y;
+    }
 
-      mapPinMain.style.top = coordinates.y + 'px';
-      mapPinMain.style.left = coordinates.x + 'px';
+    mapPinMain.style.top = coordinates.y + 'px';
+    mapPinMain.style.left = coordinates.x + 'px';
 
-      setAddress(coordinates.x, coordinates.y);
+    setAddress(coordinates.x, coordinates.y);
 
     var onDocumentMouseUp = function (upEvt) {
       upEvt.preventDefault();
