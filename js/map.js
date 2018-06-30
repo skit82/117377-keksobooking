@@ -100,7 +100,9 @@ var timeOut = document.querySelector('#timeout');
 var roomNumber = document.querySelector('#room_number');
 var roomCapacity = document.querySelector('#capacity');
 var buttonReset = adForm.querySelector('.ad-form__reset');
-var avatarInput = document.querySelector('.ad-form input[name="avatar"]');
+var fileChooserAvatar = document.querySelector('#avatar');
+var fileChooserPhotos = document.querySelector('#images');
+var photosContainer = document.querySelector('.form__photo-container');
 var avatar = document.querySelector('.ad-form-header__preview img');
 var photoInput = document.querySelector('.ad-form input[name="images"]');
 var photoBox = document.querySelector('.ad-form__photo');
@@ -194,6 +196,10 @@ var roomNumberChangeHandler = function (evt) {
 
 roomNumber.addEventListener('change', roomNumberChangeHandler);
 
+var avatarClickHandler = function (result) {
+  avatar.src = result;
+};
+
 var setImage = function (fileChooser, callback) {
   fileChooser.addEventListener('change', function () {
     var file = fileChooser.files[0];
@@ -214,32 +220,15 @@ var setImage = function (fileChooser, callback) {
     }
   });
 };
+setImage(fileChooserAvatar, avatarClickHandler);
 
-var createHousingPhotosFragment = function (element) {
-  var fragment = document.createDocumentFragment();
-
-  Array.from(element.files).forEach(function (file) {
-
-    if (checkFileOnImg(file)) {
-      var imgElement = document.createElement('img');
-
-      renderImage(file, imgElement);
-
-      imgElement.width = AdFormPhoto.WIDTH;
-      imgElement.height = AdFormPhoto.HEIGHT;
-      imgElement.alt = IMG_ALT;
-      imgElement.draggable = true;
-      imgElement.style.marginRight = IMG_MARGIN;
-
-      fragment.appendChild(imgElement);
-    }
-  });
-  return fragment;
+var photoClickHandler = function (result) {
+  var previewPhoto = document.createElement('img');
+  previewPhoto.src = result;
+  previewPhoto.style = 'max-width: 100px; max-height: 100px; margin-top: 10px;';
+  photosContainer.appendChild(previewPhoto);
 };
-
-avatarInput.addEventListener('change', function () {
-  renderImage(avatarInput.files[0], avatar);
-});
+setImage(fileChooserPhotos, photoClickHandler);
 
 avatarDropZone.addEventListener('dragenter', function (evt) {
   evt.target.style.outline = '2px solid red';
@@ -366,7 +355,7 @@ var onAdFormSubmit = function (evt) {
 var init = function () {
   adFormType.addEventListener('change', onTypeFieldChange);
   adFormCheckIn.addEventListener('change', onTimeInFieldChange);
-  adFormRoomsNumber.addEventListener('change', onRoomNumberFieldChange);
+  roomNumber.addEventListener('change', roomNumberChangeHandler);
   changeAdFormFieldsState(ENABLE_FORM_FIELDS);
   buttonReset.addEventListener('click', onButtonResetClick);
   adForm.addEventListener('submit', onAdFormSubmit);
@@ -379,7 +368,7 @@ var reset = function () {
   adFormType.removeEventListener('change', onTypeFieldChange);
   adFormCheckIn.removeEventListener('change', onTimeInFieldChange);
   adFormCheckOut.removeEventListener('change', onTimeOutFieldChange);
-  adFormRoomsNumber.removeEventListener('change', onRoomNumberFieldChange);
+  roomNumber.removeEventListener('change', roomNumberChangeHandler);
   adForm.removeEventListener('submit', onAdFormSubmit);
   buttonReset.removeEventListener('click', onButtonResetClick);
   photoInput.removeEventListener('change', createHousingPhotosFragment);
