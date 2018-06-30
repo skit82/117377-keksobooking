@@ -109,13 +109,6 @@ var photoBox = document.querySelector('.ad-form__photo');
 var avatarDropZone = document.querySelector('.ad-form-header__drop-zone');
 var photoDropZone = document.querySelector('.ad-form__drop-zone');
 
-
-var AdFormPhoto = {
-  WIDTH: 70,
-  HEIGHT: 70,
-  MARGIN: 3
-};
-
 var draggedItemElement;
 
 var addDisabledFieldset = function () {
