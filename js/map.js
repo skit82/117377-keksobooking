@@ -16,7 +16,6 @@ var TIMEOUT = 2000;
 var ENABLE_FORM_FIELDS = false;
 var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 var AVATAR_DAFAULT_SRC = 'img/muffin-grey.svg';
-var IMG_MARGIN = '3px';
 var PIN_HALF_HEIGHT = 42;
 var PIN_HALF_WIDTH = 31;
 var MIN_COORD = {
@@ -105,8 +104,6 @@ var fileChooserPhotos = document.querySelector('#images');
 var photosContainer = document.querySelector('.form__photo-container');
 var avatar = document.querySelector('.ad-form-header__preview img');
 
-
-var draggedItemElement;
 
 var addDisabledFieldset = function () {
   for (var i = 0; i < fieldsetForm.length; i++) {
@@ -220,70 +217,11 @@ var photoClickHandler = function (result) {
 };
 setImage(fileChooserPhotos, photoClickHandler);
 
-var removeAdFormPhotos = function () {
-  var photos = photoBox.querySelectorAll('img');
-    photos.forEach(function (image) {
-    image.remove();
-  });
-};
-
 var enablePageState = function () {
   map.classList.remove('map--faded');
   pageState = 'enabled';
   adForm.classList.remove('ad-form--disabled');
   mapPinsContainer.appendChild(pinsFragment);
-};
-
-var onButtonResetClick = function () {
-  onRoomNumberFieldChange();
-  onTypeFieldChange();
-  removeAdFormPhotos();
-};
-
-var onSuccess = function () {
-  removeAdFormPhotos();
-  avatar.src = AVATAR_DAFAULT_SRC;
-  onRoomNumberFieldChange();
-  onTypeFieldChange();
-  var successMessage = document.querySelector('.success');
-  successMessage.classList.remove('hidden');
-  var hideSuccessMessage = function () {
-    successMessage.classList.add('hidden');
-  };
-  setTimeout(hideSuccessMessage, TIMEOUT);
-};
-
-var onAdFormSubmit = function (evt) {
-  if (roomNumberChangeHandler.disabled) {
-    roomCapacity.setCustomValidity(VALID_CAPACITY_TEXT);
-    return;
-  }
-  evt.preventDefault();
-};
-
-var init = function () {
-  adFormType.addEventListener('change', onTypeFieldChange);
-  adFormCheckIn.addEventListener('change', onTimeInFieldChange);
-  roomNumber.addEventListener('change', roomNumberChangeHandler);
-  changeAdFormFieldsState(ENABLE_FORM_FIELDS);
-  buttonReset.addEventListener('click', onButtonResetClick);
-  adForm.addEventListener('submit', onAdFormSubmit);
-  setAddressFieldValue('dragged');
-  adForm.classList.remove('ad-form--disabled');
-};
-
-var reset = function () {
-  avatar.src = AVATAR_DAFAULT_SRC;
-  adFormType.removeEventListener('change', onTypeFieldChange);
-  adFormCheckIn.removeEventListener('change', onTimeInFieldChange);
-  adFormCheckOut.removeEventListener('change', onTimeOutFieldChange);
-  roomNumber.removeEventListener('change', roomNumberChangeHandler);
-  adForm.removeEventListener('submit', onAdFormSubmit);
-  buttonReset.removeEventListener('click', onButtonResetClick);
-  photoInput.removeEventListener('change', createHousingPhotosFragment);
-
-  removeAdFormPhotos();
-  adForm.classList.add('ad-form--disabled');
 };
 
 var setAddress = function (xCoord, yCoord) {
