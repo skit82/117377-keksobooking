@@ -104,10 +104,7 @@ var fileChooserAvatar = document.querySelector('#avatar');
 var fileChooserPhotos = document.querySelector('#images');
 var photosContainer = document.querySelector('.form__photo-container');
 var avatar = document.querySelector('.ad-form-header__preview img');
-var photoInput = document.querySelector('.ad-form input[name="images"]');
-var photoBox = document.querySelector('.ad-form__photo');
-var avatarDropZone = document.querySelector('.ad-form-header__drop-zone');
-var photoDropZone = document.querySelector('.ad-form__drop-zone');
+
 
 var draggedItemElement;
 
@@ -222,87 +219,6 @@ var photoClickHandler = function (result) {
   photosContainer.appendChild(previewPhoto);
 };
 setImage(fileChooserPhotos, photoClickHandler);
-
-avatarDropZone.addEventListener('dragenter', function (evt) {
-  evt.target.style.outline = '2px solid red';
-  evt.preventDefault();
-});
-
-avatarDropZone.addEventListener('dragleave', function (evt) {
-  evt.target.style.outline = '';
-  evt.preventDefault();
-});
-
-avatarDropZone.addEventListener('dragover', function (evt) {
-  evt.preventDefault();
-  return false;
-});
-
-avatarDropZone.addEventListener('drop', function (evt) {
-  evt.preventDefault();
-  evt.target.style.outline = '';
-
-  renderImage(evt.dataTransfer.files[0], avatar);
-});
-
-photoInput.addEventListener('change', function () {
-  photoBox.appendChild(createHousingPhotosFragment(photoInput));
-});
-
-photoDropZone.addEventListener('dragenter', function (evt) {
-  evt.target.style.outline = '2px solid red';
-  evt.preventDefault();
-});
-
-photoDropZone.addEventListener('dragleave', function (evt) {
-  evt.target.style.outline = '';
-  evt.preventDefault();
-});
-
-photoDropZone.addEventListener('dragover', function (evt) {
-  evt.preventDefault();
-  return false;
-});
-
-photoDropZone.addEventListener('drop', function (evt) {
-  evt.preventDefault();
-
-  evt.target.style.outline = '';
-
-  var files = evt.dataTransfer;
-
-  photoBox.appendChild(createHousingPhotosFragment(files));
-});
-
-photoBox.addEventListener('dragstart', function (evt) {
-  if (evt.target.tagName === 'IMG') {
-    draggedItemElement = evt.target;
-  }
-});
-
-photoBox.addEventListener('dragover', function (evt) {
-  evt.preventDefault();
-});
-
-photoBox.addEventListener('drop', function (evt) {
-  var target = evt.target;
-  if (target.tagName === 'IMG') {
-    if (target.offsetTop === draggedItemElement.offsetTop) {
-      if (target.offsetLeft < draggedItemElement.offsetLeft) {
-        target.insertAdjacentElement('beforebegin', draggedItemElement);
-      } else if (target.offsetLeft > draggedItemElement.offsetLeft) {
-        target.insertAdjacentElement('afterend', draggedItemElement);
-      }
-      } else {
-      if (target.offsetTop < draggedItemElement.offsetTop) {
-        target.insertAdjacentElement('beforebegin', draggedItemElement);
-      } else if (target.offsetTop > draggedItemElement.offsetTop) {
-        target.insertAdjacentElement('afterend', draggedItemElement);
-        }
-      }
-  }
-  evt.preventDefault();
-});
 
 var removeAdFormPhotos = function () {
   var photos = photoBox.querySelectorAll('img');
