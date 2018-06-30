@@ -15,12 +15,12 @@ var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 var PIN_HALF_HEIGHT = 42;
 var PIN_HALF_WIDTH = 31;
 var MIN_COORD = {
-  X: 300 - PIN_HALF_WIDTH,
-  Y: 100 - PIN_HALF_HEIGHT
+  X: 63 - PIN_HALF_WIDTH,
+  Y: 142 - PIN_HALF_HEIGHT
 };
 var MAX_COORD = {
-  X: 900 - PIN_HALF_WIDTH,
-  Y: 500 - PIN_HALF_HEIGHT
+  X: 1151 - PIN_HALF_WIDTH,
+  Y: 672 - PIN_HALF_HEIGHT
 };
 
 var createOffer = function (i) {
@@ -267,20 +267,20 @@ var onMapPinMainMouseDown = function (evt) {
     mapPinMain.style.left = coordinates.x + 'px';
 
     setAddress(coordinates.x, coordinates.y);
-
-    var onDocumentMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-      if (pageState === 'disabled') {
-        enablePageState();
-      }
-
-      document.removeEventListener('mousemove', onDocumentMouseMove);
-      document.removeEventListener('mouseup', onDocumentMouseUp);
-    };
-
-    document.addEventListener('mouseup', onDocumentMouseUp);
   };
+
+  var onDocumentMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    if (pageState === 'disabled') {
+      enablePageState();
+    }
+
+    document.removeEventListener('mousemove', onDocumentMouseMove);
+    document.removeEventListener('mouseup', onDocumentMouseUp);
+  };
+
   document.addEventListener('mousemove', onDocumentMouseMove);
+  document.addEventListener('mouseup', onDocumentMouseUp);
 };
 
 mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
