@@ -16,11 +16,11 @@ var PIN_HALF_HEIGHT = 42;
 var PIN_HALF_WIDTH = 31;
 var MIN_COORD = {
   X: 63 - PIN_HALF_WIDTH,
-  Y: 142 - PIN_HALF_HEIGHT
+  Y: 172 - PIN_HALF_HEIGHT
 };
 var MAX_COORD = {
   X: 1151 - PIN_HALF_WIDTH,
-  Y: 592 - PIN_HALF_HEIGHT
+  Y: 672 - PIN_HALF_HEIGHT
 };
 
 var createOffer = function (i) {
