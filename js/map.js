@@ -20,7 +20,7 @@ var MIN_COORD = {
 };
 var MAX_COORD = {
   X: 1151 - PIN_HALF_WIDTH,
-  Y: 672 - PIN_HALF_HEIGHT
+  Y: 592 - PIN_HALF_HEIGHT
 };
 
 var createOffer = function (i) {
