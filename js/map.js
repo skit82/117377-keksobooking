@@ -71,7 +71,7 @@ var getOffers = function (countOfOffers) {
   }
   return offers;
 };
-var offersArray = getOffers(OFFERS_COUNT);
+getOffers(OFFERS_COUNT);
 
 var pageState = 'disabled';
 var mapPinMain = document.querySelector('.map__pin--main');
