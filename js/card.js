@@ -106,6 +106,6 @@
   };
 
   window.card = {
-    openCardItem = openCardItem;
+    openCardItem: openCardItem
   };
 })();

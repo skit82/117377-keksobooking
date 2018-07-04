@@ -6,6 +6,8 @@
   var PRICES = [0, 1000, 5000, 10000];
 
   var adForm = document.querySelector('.ad-form');
+  var map = document.querySelector('.map');
+  var mapPinsContainer = document.querySelector('.map__pins');
   var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
   var title = document.querySelector('#title');
   var addressInput = document.querySelector('#address');
@@ -18,9 +20,9 @@
   var roomCapacity = document.querySelector('#capacity');
   var fileChooserAvatar = document.querySelector('#avatar');
   var fileChooserPhotos = document.querySelector('#images');
+  var descriptionField = document.querySelector('#description');
   var photosContainer = document.querySelector('.form__photo-container');
   var avatar = document.querySelector('.ad-form-header__preview img');
-  var pageState = 'disabled';
 
   var addDisabledFieldset = function () {
     for (var i = 0; i < fieldsetForm.length; i++) {
@@ -57,12 +59,12 @@
   var syncValues = function (element, value) {
     element.value = value;
   };
-  window.synchronizeFields(timeIn, timeOut, TIMES, TIMES, syncValues);
+  window.synchronize.synchronizeFields(timeIn, timeOut, TIMES, TIMES, syncValues);
 
   var syncValueWithMin = function (element, value) {
     element.min = value;
   };
-  window.synchronizeFields(type, priceInput, TYPES, PRICES, syncValueWithMin);
+  window.synchronize.synchronizeFields(type, priceInput, TYPES, PRICES, syncValueWithMin);
   priceInput.addEventListener('invalid', priceInputInvalidHandler);
 
   var disableRoomSelects = function () {
@@ -137,7 +139,7 @@
     featuresFields.forEach(function (elem) {
       elem.checked = false;
     });
-    syncValues(description, '');
+    syncValues(descriptionField, '');
   };
 
   window.form = {
