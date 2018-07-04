@@ -74,7 +74,6 @@ var getOffers = function (countOfOffers) {
 var offersArray = getOffers(OFFERS_COUNT);
 
 var pageState = 'disabled';
-var template = document.querySelector('template');
 var mapPinMain = document.querySelector('.map__pin--main');
 
 var onMapPinMainMouseDown = function (evt) {
@@ -140,4 +139,4 @@ mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
 window.map = {
   getOffers: getOffers,
   OFFERS_COUNT: OFFERS_COUNT
-}
+};

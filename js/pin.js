@@ -33,7 +33,6 @@
     });
     return fragment;
   };
-  var pinsFragment = renderPins(offersArray);
 
   window.pin = {
     renderPins: renderPins

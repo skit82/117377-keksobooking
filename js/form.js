@@ -8,7 +8,7 @@
   var adForm = document.querySelector('.ad-form');
   var map = document.querySelector('.map');
   var mapPinsContainer = document.querySelector('.map__pins');
-  var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
+  // var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
   var title = document.querySelector('#title');
   var addressInput = document.querySelector('#address');
   var fieldsetForm = document.querySelectorAll('fieldset');
@@ -20,7 +20,7 @@
   var roomCapacity = document.querySelector('#capacity');
   var fileChooserAvatar = document.querySelector('#avatar');
   var fileChooserPhotos = document.querySelector('#images');
-  var descriptionField = document.querySelector('#description');
+  // var descriptionField = document.querySelector('#description');
   var photosContainer = document.querySelector('.form__photo-container');
   var avatar = document.querySelector('.ad-form-header__preview img');
 
@@ -128,7 +128,7 @@
     // div.appendChild(p);
     // fragment.appendChild(div);
     // window.setTimeout(function () {
-      // document.querySelector('.success-message').style = 'display: none;';
+    // document.querySelector('.success-message').style = 'display: none;';
     // }, 3000);
 
     // syncValues(title, '');
@@ -139,7 +139,7 @@
     // roomNumber.selectedIndex = 0;
     // roomCapacity.selectedIndex = 2;
     // featuresFields.forEach(function (elem) {
-      // elem.checked = false;
+    // elem.checked = false;
     // });
     // syncValues(descriptionField, '');
   // };
