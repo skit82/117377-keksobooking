@@ -23,7 +23,6 @@
   // var descriptionField = document.querySelector('#description');
   var photosContainer = document.querySelector('.form__photo-container');
   var avatar = document.querySelector('.ad-form-header__preview img');
-  var pageState = 'enabled';
 
   var addDisabledFieldset = function () {
     for (var i = 0; i < fieldsetForm.length; i++) {
