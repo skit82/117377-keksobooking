@@ -105,7 +105,7 @@
 
   var enablePageState = function () {
     map.classList.remove('map--faded');
-    pageState = 'enabled';
+    // pageState = 'enabled';
     adForm.classList.remove('ad-form--disabled');
     var offers = window.map.getOffers(window.map.OFFERS_COUNT);
     var pinsFragment = window.pin.renderPins(offers);
