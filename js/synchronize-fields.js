@@ -14,4 +14,5 @@
     };
     secondElement.addEventListener('change', secondElementChangeHandler);
   };
+  synchronizeFields();
 })();

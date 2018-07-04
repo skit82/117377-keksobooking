@@ -6,7 +6,7 @@
   var PRICES = [0, 1000, 5000, 10000];
 
   var adForm = document.querySelector('.ad-form');
-  var featuresFields =adForm.querySelectorAll('.features input[type=checkbox]');
+  var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
   var title = document.querySelector('#title');
   var addressInput = document.querySelector('#address');
   var fieldsetForm = document.querySelectorAll('fieldset');
@@ -87,10 +87,12 @@
   roomNumber.addEventListener('change', roomNumberChangeHandler);
 
   var avatarClickHandler = function (result) {
-      avatar.src = result;
-    };
+    avatar.src = result;
+  };
 
-    var photoClickHandler = function (result) {
+  window.loadPhoto.setImage(fileChooserAvatar, avatarClickHandler);
+
+  var photoClickHandler = function (result) {
     var previewPhoto = document.createElement('img');
     previewPhoto.src = result;
     previewPhoto.style = 'max-width: 100px; max-height: 100px; margin-top: 10px;';
@@ -135,7 +137,7 @@
     featuresFields.forEach(function (elem) {
       elem.checked = false;
     });
-    syncValues(descriptionField, '');
+    syncValues(description, '');
   };
 
   window.form = {
