@@ -107,6 +107,8 @@
     map.classList.remove('map--faded');
     pageState = 'enabled';
     adForm.classList.remove('ad-form--disabled');
+    var offers = window.map.getOffers(window.map.OFFERS_COUNT);
+    var pinsFragment = window.pin.renderPins(offers);
     mapPinsContainer.appendChild(pinsFragment);
   };
 
@@ -116,31 +118,31 @@
     addressInput.setAttribute('value', addressString);
   };
 
-  var onLoad = function () {
-    var fragment = document.createDocumentFragment();
-    var div = document.createElement('div');
-    var p = document.createElement('p');
-    div.classList.add('success-message');
-    div.style = 'position: fixed; z-index: 10; width: 300px; height: 50px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #6EBC72; color: #ffffff; text-align: center; border: 2px solid white';
-    p.textContent = 'Данные успешно отправлены';
-    div.appendChild(p);
-    fragment.appendChild(div);
-    window.setTimeout(function () {
-      document.querySelector('.success-message').style = 'display: none;';
-    }, 3000);
+  // var onLoad = function () {
+    // var fragment = document.createDocumentFragment();
+    // var div = document.createElement('div');
+    // var p = document.createElement('p');
+    // div.classList.add('success-message');
+    // div.style = 'position: fixed; z-index: 10; width: 300px; height: 50px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #6EBC72; color: #ffffff; text-align: center; border: 2px solid white';
+    // p.textContent = 'Данные успешно отправлены';
+    // div.appendChild(p);
+    // fragment.appendChild(div);
+    // window.setTimeout(function () {
+      // document.querySelector('.success-message').style = 'display: none;';
+    // }, 3000);
 
-    syncValues(title, '');
-    syncValues(TYPES, 'flat');
-    syncValues(priceInput, '1000');
-    syncValues(timeIn, '12:00');
-    syncValues(timeOut, '12:00');
-    roomNumber.selectedIndex = 0;
-    roomCapacity.selectedIndex = 2;
-    featuresFields.forEach(function (elem) {
-      elem.checked = false;
-    });
-    syncValues(descriptionField, '');
-  };
+    // syncValues(title, '');
+    // syncValues(TYPES, 'flat');
+    // syncValues(priceInput, '1000');
+    // syncValues(timeIn, '12:00');
+    // syncValues(timeOut, '12:00');
+    // roomNumber.selectedIndex = 0;
+    // roomCapacity.selectedIndex = 2;
+    // featuresFields.forEach(function (elem) {
+      // elem.checked = false;
+    // });
+    // syncValues(descriptionField, '');
+  // };
 
   window.form = {
     removeDisabledFieldset: removeDisabledFieldset,

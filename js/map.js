@@ -136,3 +136,8 @@ var onMapPinMainMouseDown = function (evt) {
 };
 
 mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
+
+window.map = {
+  getOffers: getOffers,
+  OFFERS_COUNT: OFFERS_COUNT
+}
