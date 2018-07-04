@@ -75,11 +75,7 @@ var offersArray = getOffers(OFFERS_COUNT);
 
 var pageState = 'disabled';
 var template = document.querySelector('template');
-var pinTemplate = template.content.querySelector('.map__pin');
-var map = document.querySelector('.map');
-var mapPinsContainer = document.querySelector('.map__pins');
 var mapPinMain = document.querySelector('.map__pin--main');
-
 
 var onMapPinMainMouseDown = function (evt) {
   evt.preventDefault();

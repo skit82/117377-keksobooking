@@ -17,5 +17,5 @@
 
   window.synchronize = {
     synchronizeFields: synchronizeFields
-  }
+  };
 })();
