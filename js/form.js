@@ -8,7 +8,7 @@
   var adForm = document.querySelector('.ad-form');
   var map = document.querySelector('.map');
   var mapPinsContainer = document.querySelector('.map__pins');
-  // var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
+  var featuresFields = adForm.querySelectorAll('.features input[type=checkbox]');
   var title = document.querySelector('#title');
   var addressInput = document.querySelector('#address');
   var fieldsetForm = document.querySelectorAll('fieldset');
@@ -20,7 +20,7 @@
   var roomCapacity = document.querySelector('#capacity');
   var fileChooserAvatar = document.querySelector('#avatar');
   var fileChooserPhotos = document.querySelector('#images');
-  // var descriptionField = document.querySelector('#description');
+  var descriptionField = document.querySelector('#description');
   var photosContainer = document.querySelector('.form__photo-container');
   var avatar = document.querySelector('.ad-form-header__preview img');
 
@@ -118,31 +118,38 @@
     addressInput.setAttribute('value', addressString);
   };
 
-  // var onLoad = function () {
-    // var fragment = document.createDocumentFragment();
-    // var div = document.createElement('div');
-    // var p = document.createElement('p');
-    // div.classList.add('success-message');
-    // div.style = 'position: fixed; z-index: 10; width: 300px; height: 50px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #6EBC72; color: #ffffff; text-align: center; border: 2px solid white';
-    // p.textContent = 'Данные успешно отправлены';
-    // div.appendChild(p);
-    // fragment.appendChild(div);
-    // window.setTimeout(function () {
-    // document.querySelector('.success-message').style = 'display: none;';
-    // }, 3000);
+  var onLoad = function () {
+    var fragment = document.createDocumentFragment();
+    var div = document.createElement('div');
+    var p = document.createElement('p');
+    div.classList.add('success-message');
+    div.style = 'position: fixed; z-index: 10; width: 300px; height: 50px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #6EBC72; color: #ffffff; text-align: center; border: 2px solid white';
+    p.textContent = 'Данные успешно отправлены';
+    div.appendChild(p);
+    fragment.appendChild(div);
+    window.map.mapSection.appendChild(fragment);
+    window.setTimeout(function () {
+    document.querySelector('.success-message').style = 'display: none;';
+    }, 3000);
 
-    // syncValues(title, '');
-    // syncValues(TYPES, 'flat');
-    // syncValues(priceInput, '1000');
-    // syncValues(timeIn, '12:00');
-    // syncValues(timeOut, '12:00');
-    // roomNumber.selectedIndex = 0;
-    // roomCapacity.selectedIndex = 2;
-    // featuresFields.forEach(function (elem) {
-    // elem.checked = false;
-    // });
-    // syncValues(descriptionField, '');
-  // };
+    syncValues(title, '');
+    syncValues(TYPES, 'flat');
+    syncValues(priceInput, '1000');
+    syncValues(timeIn, '12:00');
+    syncValues(timeOut, '12:00');
+    roomNumber.selectedIndex = 0;
+    roomCapacity.selectedIndex = 2;
+    featuresFields.forEach(function (elem) {
+    elem.checked = false;
+    });
+    syncValues(descriptionField, '');
+  };
+
+  var formSubmitHandler = function (evt) {
+    window.backend.upload(new FormData(adForm), onLoad, window.utilis.onError);
+    evt.preventDefault();
+  };
+  adForm.addEventListener('submit', formSubmitHandler);
 
   window.form = {
     removeDisabledFieldset: removeDisabledFieldset,

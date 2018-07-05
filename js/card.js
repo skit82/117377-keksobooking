@@ -106,6 +106,7 @@
   };
 
   window.card = {
-    openCardItem: openCardItem
+    openCardItem: openCardItem,
+    onCloseCardItemClick: onCloseCardItemClick
   };
 })();
