@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var SERVER_URL = 'https://js.dump.academy/keksobooking';
+  var GET_URL = 'https://js.dump.academy/keksobooking/data';
+  var POST_URL = 'https://js.dump.academy/keksobooking';
   var TIMEOUT_TIME = 10000;
   var SUCCESS_STATUS = 200;
 
@@ -34,13 +35,13 @@
     upload: function (data, onLoad, onError) {
       var xhr = setup(onLoad, onError);
 
-      xhr.open('POST', SERVER_URL);
+      xhr.open('POST', POST_URL);
       xhr.send(data);
     },
     download: function (onLoad, onError) {
       var xhr = setup(onLoad, onError);
 
-      xhr.open('GET', SERVER_URL + '/data');
+      xhr.open('GET', GET_URL);
       xhr.send();
     }
   };

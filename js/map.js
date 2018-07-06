@@ -74,6 +74,7 @@ var getOffers = function (countOfOffers) {
 getOffers(OFFERS_COUNT);
 
 var pageState = 'disabled';
+var map = document.querySelector('.map');
 var mapPinMain = document.querySelector('.map__pin--main');
 
 var onMapPinMainMouseDown = function (evt) {
@@ -130,13 +131,14 @@ var onMapPinMainMouseDown = function (evt) {
     document.removeEventListener('mouseup', onDocumentMouseUp);
   };
 
-  document.addEventListener('mousemove', onDocumentMouseMove);
   document.addEventListener('mouseup', onDocumentMouseUp);
+  document.addEventListener('mousemove', onDocumentMouseMove);
 };
 
 mapPinMain.addEventListener('mousedown', onMapPinMainMouseDown);
 
 window.map = {
   getOffers: getOffers,
-  OFFERS_COUNT: OFFERS_COUNT
+  OFFERS_COUNT: OFFERS_COUNT,
+  mapSection: map
 };

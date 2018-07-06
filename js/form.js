@@ -146,7 +146,8 @@
   };
 
   var formSubmitHandler = function (evt) {
-    window.backend.upload(new FormData(adForm), onLoad, window.utilis.onError);
+    debugger;
+    window.backend.upload(new FormData(adForm), onLoad, window.utils.onError);
     evt.preventDefault();
   };
   adForm.addEventListener('submit', formSubmitHandler);
